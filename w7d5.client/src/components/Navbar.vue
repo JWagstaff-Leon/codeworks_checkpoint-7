@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+  <nav class="navbar navbar-expand-lg navbar-dark px-3 flex-lg-column">
+    <router-link class="navbar-brand d-flex d-lg-none" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+        <span class="fs-3">the t<img alt="logo" src="../assets/img/tower_logo.svg" height="30" />wer</span>
       </div>
     </router-link>
     <button
@@ -16,8 +16,8 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse flex-column" id="navbarText">
+      <!-- <ul class="navbar-nav me-auto">
         <li>
           <router-link
             :to="{ name: 'About' }"
@@ -26,9 +26,12 @@
             About
           </router-link>
         </li>
-      </ul>
+      </ul> -->
       <!-- LOGIN COMPONENT HERE -->
       <Login />
+      <router-link :to="{ name: 'Home' }">
+        <button class="btn text-info">home</button>
+      </router-link>
     </div>
   </nav>
 </template>
@@ -52,5 +55,12 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.navbar
+{
+    /* FIXME fix this gradient not working */
+    /* background: linear-gradient(to bottom, #474C61FF, #474C6100); */
+    background-color: #474C61;
 }
 </style>
