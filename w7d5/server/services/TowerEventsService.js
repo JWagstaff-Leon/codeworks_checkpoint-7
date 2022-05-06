@@ -10,7 +10,7 @@ class TowerEventsService
 
     async findById(id)
     {
-        const found = await dbContext.TowerEvents.findById(id).populate("creator filled");
+        const found = await dbContext.TowerEvents.findById(id).populate("creator", "name picture").populate("filled");
         if(!found)
         {
             throw new BadRequest("Event with that id not found.");
