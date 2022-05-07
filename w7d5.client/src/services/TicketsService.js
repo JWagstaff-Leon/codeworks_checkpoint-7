@@ -15,14 +15,27 @@ class TicketsService
     async attendEvent(eventId)
     {
         const res = await api.post("api/tickets", { eventId });
+        logger.log("TicketsService > ")
         AppState.attendees.unshift(res.data.account);
-        this.getUserTickets();
+        AppState.userTickets.push(res.data)
+    }
+
+    async unattendEvent(id)
+    {
+        const res = await api.delete("api/tickets/" + id);
+
+        const attendeeIndex = AppState.attendees.findIndex(attendee => attendee.id === res.data.accountId);
+        AppState.attendees.splice(attendeeIndex, 1);
+
+        const userIndex = AppState.userTickets.findIndex(ticket => ticket.eventId === res.data.eventId);
+        AppState.userTickets.splice(userIndex, 1);
     }
 
     async getUserTickets()
     {
         this.clearUserActive();
         const res = await api.get("account/tickets");
+        logger.log("TicketsService > getUserTickets response", res.data)
         AppState.userTickets = res.data;
     }
 

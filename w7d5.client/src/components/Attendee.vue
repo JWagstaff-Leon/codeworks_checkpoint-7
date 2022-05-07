@@ -1,7 +1,7 @@
 <template>
     <div class="position-relative d-inline-block">
         <img :src="attendee.picture" @mouseenter="nameVisible = true; firstHovered = true" @mouseleave="nameVisible = false" />
-        <span :id="'attendee-' + attendee.id" :class="{'fade-in': nameVisible, 'fade-out': !nameVisible, 'visually-hidden': !firstHovered}" class="border-2 rounded-3 py-2 px-3 text-light bg-dark darken-10">{{attendee.name}}</span>
+        <span :class="{'fade-in': nameVisible, 'fade-out': !nameVisible, 'visually-hidden': !firstHovered}" class="border-2 rounded-3 py-2 px-3 text-light bg-dark darken-10">{{attendee.name}}</span>
     </div>
 </template>
 

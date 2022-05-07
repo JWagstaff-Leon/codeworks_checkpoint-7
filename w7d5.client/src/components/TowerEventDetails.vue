@@ -21,7 +21,8 @@
                     <div class="d-flex justify-content-between mt-2">
                         <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spot<span v-if="towerEvent.capacity != 1">s</span> left</span>
                         <div v-if="account.id">
-                            <button v-if="towerEvent?.capacity > 0" class="btn btn-warning px-4 py-2 no-select" @click="attend">Attend <i class="mdi mdi-human-handsup"></i></button>
+                            <button v-if="userRegistered" class="btn btn-warning px-4 py-2 no-select" @click="unattend">Cancel Ticket <i class="mdi mdi-human-handsdown"></i></button>
+                            <button v-else-if="towerEvent?.capacity > 0" class="btn btn-info px-4 py-2 no-select" @click="attend">Attend <i class="mdi mdi-human-handsup"></i></button>
                             <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>
                         </div>
                     </div>
@@ -59,8 +60,10 @@ export default
     setup(props)
     {
         const route = useRoute();
+        const userRegistered =  computed(() => AppState.userTickets.find(ticket => ticket.eventId === props.towerEvent.id)?.id);
         return {
             account: computed(() => AppState.account),
+            userRegistered,
             async attend()
             {
                 try
@@ -71,6 +74,22 @@ export default
                 catch(error)
                 {
                     logger.error("[TowerEventDetails.vue > attend]", error.message);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            async unattend()
+            {
+                try
+                {
+                    if(await Pop.confirm())
+                    {
+                        await ticketsService.unattendEvent(userRegistered.value);
+                        Pop.toast("You have unregistered from " + props.towerEvent.name + ".")
+                    }
+                }
+                catch(error)
+                {
+                    logger.error("[TowerEventDetail.vue > unattend]", error.message);
                     Pop.toast(error.message, "error");
                 }
             }
