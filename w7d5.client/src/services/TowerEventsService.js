@@ -8,8 +8,14 @@ function _formatDate(p_date)
     let newDate = "";
 
     newDate += oldDate.getDate();
-    switch(newDate[newDate.length - 1])
+    if(+newDate >= 4 && +newDate <= 20 )
     {
+        newDate += "th";
+    }
+    else
+    {
+        switch(newDate[newDate.length - 1])
+        {
         case "0":
         case "4":
         case "5":
@@ -28,6 +34,7 @@ function _formatDate(p_date)
         case "3":
             newDate += "rd";
             break;
+        }
     }
 
     newDate += " of ";

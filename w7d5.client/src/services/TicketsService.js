@@ -15,20 +15,29 @@ class TicketsService
     async attendEvent(eventId)
     {
         const res = await api.post("api/tickets", { eventId });
-        logger.log("TicketsService > ")
-        AppState.attendees.unshift(res.data.account);
-        AppState.userTickets.push(res.data)
-    }
+        const res2 = await api.get("account/tickets");
 
+        logger.log("TicketsService > attendEvent > post 'api/tickets' response", res.data);
+        logger.log("TicketsService > attendEvent > get 'account/tickets' response", res2.data);
+
+        AppState.userTickets.push(res2.data.find(ticket => ticket.eventId === res.data.eventId));
+        AppState.attendees.unshift(res.data.account);
+
+        AppState.activeTowerEvent.capacity -= 1;
+    }
+    
     async unattendEvent(id)
     {
         const res = await api.delete("api/tickets/" + id);
+        logger.log("TicketsService > unattendEvent response", res.data);
 
         const attendeeIndex = AppState.attendees.findIndex(attendee => attendee.id === res.data.accountId);
         AppState.attendees.splice(attendeeIndex, 1);
 
         const userIndex = AppState.userTickets.findIndex(ticket => ticket.eventId === res.data.eventId);
         AppState.userTickets.splice(userIndex, 1);
+        
+        AppState.activeTowerEvent.capacity += 1;
     }
 
     async getUserTickets()
