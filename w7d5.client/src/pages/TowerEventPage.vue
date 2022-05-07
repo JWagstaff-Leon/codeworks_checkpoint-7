@@ -6,37 +6,51 @@
                     <TowerEventDetails :towerEvent="towerEvent"/>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <Attendees :attendees="attendees" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService.js';
+import { ticketsService } from '../services/TicketsService.js';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import Loader from "../utils/Loader.js";
 export default
 {
     setup()
     {
+        const loading = ref(true);
         const route = useRoute();
         onMounted(async () =>
         {
             try
             {
-                await towerEventsService.getById(route.params.id);
+                loading.value = true;
+                const loader = new Loader();
+                loader.step(towerEventsService.getById, [route.params.id]);
+                loader.step(ticketsService.getByEvent, [route.params.id]);
+                await loader.load();
+                loading.value = false;
             }
             catch(error)
             {
-                logger.error("[EventPage.vue > onMounted]", error.message);
+                logger.error("[TowerEventPage.vue > onMounted]", error.message);
                 Pop.toast(error.message, "error");
             }
         });
 
         return {
             towerEvent: computed(() => AppState.activeTowerEvent),
+            attendees: computed(() => AppState.attendees),
             account: computed(() => AppState.account)
         }
     }
