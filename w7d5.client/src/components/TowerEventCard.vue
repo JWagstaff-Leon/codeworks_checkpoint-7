@@ -2,13 +2,14 @@
     <div class="col-12 col-lg-6 col-xl-4 col-xxl-3 px-3 my-2 bg-dark d-flex">
         <div class="card bg-dark lighten-15 text-white p-1 action towerevent-card" :title="`Go to event page for ${towerEvent.name}`" :aria-label="`Go to event page for ${towerEvent.name}`">
             <router-link :to="{ name: 'EventDetails', params: { id: towerEvent.id }}">
-                <img :src="towerEvent.coverImg" class="card-img" alt="...">
+                <img :src="towerEvent.coverImg" class="card-img" alt="No Image Provided">
                 <div class="card-img-overlay d-flex flex-column justify-content-end p-1">
                     <div class="towerevent-card-details p-1 d-flex flex-column">
                         <span class="card-title my-0 fw-bold">{{towerEvent.name}}</span>
                         <span class="card-text">{{towerEvent.location}}</span>
                         <span class="card-text">{{towerEvent.startDate}}</span>
-                        <span class="card-text align-self-end"><span class="text-primary">{{towerEvent.capacity}}</span> spots left</span>
+                        <span v-if="towerEvent.capacity <= 0" class="rounded bg-danger text-dark w-100 text-center fw-bold" height="24">At Capacity</span>
+                        <span v-else class="card-text align-self-end"><span class="text-primary">{{towerEvent.capacity}}</span> spots left</span>
                     </div>
                 </div>
             </router-link>
@@ -60,5 +61,6 @@ a
 {
     height: 100%;
     width: 100%;
+    color: unset;
 }
 </style>
