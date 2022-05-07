@@ -1,18 +1,19 @@
 <template>
-  <div class="flex-grow-1 d-flex flex-column align-items-center bg-dark">
-      <div class="container">
-          <div class="row">
-              <div class="col-12"></div>
-          </div>
-          <div class="row">
-              <TowerEventCard v-for="t in towerEvents" :key="t.id" :towerEvent="t" />
-          </div>
-      </div>
-  </div>
+    <LoadingSpinner v-if="loading" />
+    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark fade-in">
+        <div class="container">
+            <div class="row">
+                <div class="col-12"></div>
+            </div>
+            <div class="row">
+                <TowerEventCard v-for="t in towerEvents" :key="t.id" :towerEvent="t" />
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
 import { onMounted } from '@vue/runtime-core'
 import Pop from '../utils/Pop.js'
@@ -22,11 +23,14 @@ export default {
   name: 'Home',
   setup()
     {
+        const loading = ref(true);
         onMounted(async () => 
         {
             try
             {
+                loading.value = true;
                 await towerEventsService.getAll();
+                loading.value = false;
             }
             catch(error)
             {
@@ -36,6 +40,7 @@ export default {
         });
     
         return {
+            loading,
             towerEvents: computed(() => AppState.towerEvents),
         }
     }

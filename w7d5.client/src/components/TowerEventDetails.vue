@@ -16,7 +16,7 @@
                         <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.startTime}}</span>
                     </div>
                     <div class="flex-grow-1 mt-3 description-clip">
-                        <span class="fs-5">{{towerEvent?.description}}</span>
+                        <span class="fs-6">{{towerEvent?.description}}</span>
                     </div>
                     <div class="d-flex justify-content-between mt-2">
                         <span class="fs-4"><span class="fw-bold" :class="{'text-info': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spots left</span>

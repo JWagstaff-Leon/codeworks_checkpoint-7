@@ -1,12 +1,13 @@
 <template>
-    <div class="flex-grow-1 d-flex flex-column align-items-center bg-dark">
+    <LoadingSpinner v-if="loading" />
+    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark">
         <div class="container">
             <div class="row mt-4">
                 <div class="col-12">
                     <TowerEventDetails :towerEvent="towerEvent"/>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-4">
                 <div class="col-12">
                     <Attendees :attendees="attendees" />
                 </div>
@@ -49,6 +50,7 @@ export default
         });
 
         return {
+            loading,
             towerEvent: computed(() => AppState.activeTowerEvent),
             attendees: computed(() => AppState.attendees),
             account: computed(() => AppState.account)
