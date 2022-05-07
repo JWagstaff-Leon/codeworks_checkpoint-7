@@ -79,17 +79,17 @@ function _formatTime(p_date)
     const oldTime = new Date(p_date);
     let newTime = "";
 
-    if(oldDate.getHours() < 10)
+    if(oldTime.getHours() < 10)
     {
         newTime += "0";
     }
-    newTime += oldDate.getHours();
+    newTime += oldTime.getHours();
     newTime += ":";
-    if(oldDate.getMinutes() < 10)
+    if(oldTime.getMinutes() < 10)
     {
         newTime += "0";
     }
-    newTime += oldDate.getMinutes();
+    newTime += oldTime.getMinutes();
     
     return newTime;
 }
