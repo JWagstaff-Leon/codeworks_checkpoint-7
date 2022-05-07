@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-xl navbar-dark px-3 flex-xl-column">
     <router-link class="navbar-brand d-flex d-xl-none" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <span class="fs-3">the t<img alt="logo" src="../assets/img/tower_logo.svg" height="30" />wer</span>
+        <span class="fs-2">the t<img alt="logo" src="../assets/img/tower_logo.svg" height="30" />wer</span>
       </div>
     </router-link>
     <button
