@@ -19,7 +19,7 @@
                         <span class="fs-6">{{towerEvent?.description}}</span>
                     </div>
                     <div class="d-flex justify-content-between mt-2">
-                        <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spots left</span>
+                        <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spot<span v-if="towerEvent.capacity != 1">s</span> left</span>
                         <div v-if="account.id">
                             <button v-if="towerEvent?.capacity > 0" class="btn btn-warning px-4 py-2 no-select" @click="attend">Attend <i class="mdi mdi-human-handsup"></i></button>
                             <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>

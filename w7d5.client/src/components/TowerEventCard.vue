@@ -9,7 +9,7 @@
                         <span class="card-text">{{towerEvent.location}}</span>
                         <span class="card-text">{{towerEvent.startDate}}</span>
                         <span v-if="towerEvent.capacity <= 0" class="rounded bg-danger text-dark w-100 text-center fw-bolder pb-1 mt-1 fs-4">At Capacity</span>
-                        <span v-else class="card-text align-self-end fs-4 mt-2"><span class="text-primary fw-bold">{{towerEvent.capacity}}</span> spots left</span>
+                        <span v-else class="card-text align-self-end fs-4 mt-2"><span class="text-primary fw-bold">{{towerEvent.capacity}}</span> spot<span v-if="towerEvent.capacity != 1">s</span> left</span>
                     </div>
                 </div>
             </router-link>
