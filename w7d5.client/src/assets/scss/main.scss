@@ -35,3 +35,37 @@ form:invalid button[type="submit"] {
   filter: grayscale(1);
   pointer-events: none;
 }
+
+@keyframes fadein {
+    from {
+      opacity: 0
+    }
+  
+    to {
+      opacity: 100
+    }
+  }
+  
+  .fade-in {
+    animation-name: fadein;
+    animation-timing-function: ease-out;
+    animation-duration: 0.05s;
+    animation-fill-mode: both;
+  }
+
+@keyframes fadeout {
+    from {
+      opacity: 100
+    }
+  
+    to {
+      opacity: 0
+    }
+  }
+  
+  .fade-out {
+    animation-name: fadeout;
+    animation-timing-function: ease-out;
+    animation-duration: 0.05s;
+    animation-fill-mode: both;
+  }

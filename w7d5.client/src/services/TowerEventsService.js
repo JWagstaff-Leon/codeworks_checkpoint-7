@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js";
+import { logger } from "../utils/Logger.js";
 import { api } from "./AxiosService.js";
 
 function _formatDate(p_date)
@@ -101,15 +102,17 @@ class TowerEventsService
         const res = await api.get("api/events");
         res.data.forEach(v => v.startTime = _formatTime(v.startDate));
         res.data.forEach(v => v.startDate = _formatDate(v.startDate));
+        logger.log("TowerEventsService > getAll response", res.data);
         AppState.towerEvents = res.data;
     }
-
+    
     async getById(id)
     {
         AppState.activeTowerEvent = null;
         const res = await api.get("api/events/" + id);
         res.data.startTime = _formatTime(res.data.startDate);
         res.data.startDate = _formatDate(res.data.startDate);
+        logger.log("TowerEventsService > getById response", res.data);
         AppState.activeTowerEvent = res.data;
     }
 }
