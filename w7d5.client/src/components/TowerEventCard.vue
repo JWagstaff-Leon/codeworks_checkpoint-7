@@ -1,7 +1,7 @@
 <template>
     <div class="col-12 col-lg-6 col-xl-4 col-xxl-3 px-3 my-2 bg-dark d-flex">
         <div class="card bg-dark text-white p-1 action towerevent-card" :title="`Go to event page for ${towerEvent.name}`" :aria-label="`Go to event page for ${towerEvent.name}`">
-            <router-link :to="{ name: 'EventDetails', params: { id: towerEvent.id }}">
+            <router-link :to="{ name: 'TowerEvent', params: { id: towerEvent.id }}">
                 <img :src="towerEvent.coverImg" class="card-img" alt="No Image Provided">
                 <div class="card-img-overlay d-flex flex-column justify-content-end p-1">
                     <div class="towerevent-card-details p-1 d-flex flex-column">
