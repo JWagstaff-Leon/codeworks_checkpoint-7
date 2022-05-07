@@ -5,3 +5,24 @@
         </div>
     </div>
 </template>
+
+<script>
+export default
+{
+    setup()
+    {
+        return {
+            
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.spinner-border
+{
+    width: 8rem;
+    height: 8rem;
+    border-width: 10px;
+}
+</style>

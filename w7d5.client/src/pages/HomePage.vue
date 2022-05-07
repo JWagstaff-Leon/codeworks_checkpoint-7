@@ -28,6 +28,7 @@ export default {
         {
             try
             {
+                towerEventsService.clearActive();
                 loading.value = true;
                 await towerEventsService.getAll();
                 loading.value = false;

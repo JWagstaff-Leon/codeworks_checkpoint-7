@@ -1,11 +1,12 @@
 <template>
     <div class="position-relative d-inline-block">
-        <img :src="attendee.picture" @mouseenter="toggleName" @mouseleave="toggleName" />
-        <span :id="'attendee-' + attendee.id" class="border-2 rounded-3 py-2 px-3 text-light bg-dark darken-10 visually-hidden fade-out">{{attendee.name}}</span>
+        <img :src="attendee.picture" @mouseenter="nameVisible = true; firstHovered = true" @mouseleave="nameVisible = false" />
+        <span :id="'attendee-' + attendee.id" :class="{'fade-in': nameVisible, 'fade-out': !nameVisible, 'visually-hidden': !firstHovered}" class="border-2 rounded-3 py-2 px-3 text-light bg-dark darken-10">{{attendee.name}}</span>
     </div>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity';
 import { logger } from '../utils/Logger.js';
 export default
 {
@@ -20,14 +21,11 @@ export default
 
     setup(props)
     {
+        const nameVisible = ref(false);
+        const firstHovered = ref(false);
         return {
-            toggleName()
-            {
-                document.getElementById("attendee-" + props.attendee.id).classList.remove("visually-hidden");
-                document.getElementById("attendee-" + props.attendee.id).classList.toggle("fade-in");
-                document.getElementById("attendee-" + props.attendee.id).classList.toggle("fade-out");
-                logger.log("moose")
-            }
+            nameVisible,
+            firstHovered
         }
     }
 }
@@ -46,6 +44,6 @@ span
 {
     position: absolute;
     top: -2.5rem;
-    right: -1rem;
+    left: -1rem;
 }
 </style>

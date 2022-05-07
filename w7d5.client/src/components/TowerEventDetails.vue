@@ -20,8 +20,10 @@
                     </div>
                     <div class="d-flex justify-content-between mt-2">
                         <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spots left</span>
-                        <button v-if="towerEvent?.capacity > 0" class="btn btn-warning px-4 py-2 no-select">Attend <i class="mdi mdi-human-handsup"></i></button>
-                        <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>
+                        <div v-if="account.id">
+                            <button v-if="towerEvent?.capacity > 0" class="btn btn-warning px-4 py-2 no-select" @click="attend">Attend <i class="mdi mdi-human-handsup"></i></button>
+                            <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>
+                        </div>
                     </div>
                     <div v-if="towerEvent && towerEvent?.creatorId === account.id" class="towerevent-edit dropdown">
                         <button class="btn towerevent-edit-button text-light px-3 py-1 fs-1" title="Manage your event" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i><span class="visually-hidden" id="manage-event-button-label">Manage your event</span></button>
@@ -39,6 +41,10 @@
 <script>
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
+import { logger } from '../utils/Logger.js'
+import Pop from '../utils/Pop.js'
+import { ticketsService } from '../services/TicketsService.js'
+import { useRoute } from 'vue-router'
 export default
 {
     props:
@@ -50,10 +56,24 @@ export default
         }
     },
 
-    setup()
+    setup(props)
     {
+        const route = useRoute();
         return {
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            async attend()
+            {
+                try
+                {
+                    await ticketsService.attendEvent(route.params.id);
+                    Pop.toast("You are registered to attend " + props.towerEvent.name + "!", "success");
+                }
+                catch(error)
+                {
+                    logger.error("[TowerEventDetails.vue > attend]", error.message);
+                    Pop.toast(error.message, "error");
+                }
+            }
         }
     }
 }

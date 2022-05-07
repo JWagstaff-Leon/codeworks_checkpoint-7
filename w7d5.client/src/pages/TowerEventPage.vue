@@ -1,6 +1,6 @@
 <template>
     <LoadingSpinner v-if="loading" />
-    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark">
+    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark fade-in">
         <div class="container">
             <div class="row mt-4">
                 <div class="col-12">
@@ -35,6 +35,8 @@ export default
         {
             try
             {
+                towerEventsService.clearActive();
+                ticketsService.clearActive();
                 loading.value = true;
                 const loader = new Loader();
                 loader.step(towerEventsService.getById, [route.params.id]);
