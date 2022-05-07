@@ -5,7 +5,7 @@
               <div class="col-12"></div>
           </div>
           <div class="row">
-              <TowerEventCard v-for="t in towerEvents" :key="t.id" :event="t" />
+              <TowerEventCard v-for="t in towerEvents" :key="t.id" :towerEvent="t" />
           </div>
       </div>
   </div>

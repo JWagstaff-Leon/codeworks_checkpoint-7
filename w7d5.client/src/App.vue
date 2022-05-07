@@ -1,7 +1,7 @@
 <template>
   <header>
   </header>
-  <main class="d-flex flex-column flex-lg-row-reverse">
+  <main class="d-flex flex-column flex-xl-row-reverse">
     <Navbar />
     <router-view />
   </main>

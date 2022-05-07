@@ -1,6 +1,17 @@
 <template>
-    <div class="col-12 col-lg-6 col-xl-3 p-2 towerevent-card bg-dark d-flex">
-        <div class="bg-light flex-grow-1">
+    <div class="col-12 col-lg-6 col-xl-4 col-xxl-3 px-3 my-2 bg-dark d-flex">
+        <div class="card bg-dark lighten-15 text-white p-1 action towerevent-card" :title="`Go to event page for ${towerEvent.name}`" :aria-label="`Go to event page for ${towerEvent.name}`">
+            <router-link :to="{ name: 'EventDetails', params: { id: towerEvent.id }}">
+                <img :src="towerEvent.coverImg" class="card-img" alt="...">
+                <div class="card-img-overlay d-flex flex-column justify-content-end p-1">
+                    <div class="towerevent-card-details p-1 d-flex flex-column">
+                        <span class="card-title my-0 fw-bold">{{towerEvent.name}}</span>
+                        <span class="card-text">{{towerEvent.location}}</span>
+                        <span class="card-text">{{towerEvent.startDate}}</span>
+                        <span class="card-text align-self-end"><span class="text-primary">{{towerEvent.capacity}}</span> spots left</span>
+                    </div>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -10,7 +21,7 @@ export default
 {
     props:
     {
-        event:
+        towerEvent:
         {
             type: Object,
             required: true
@@ -29,6 +40,25 @@ export default
 <style lang="scss" scoped>
 .towerevent-card
 {
-    height: 28vh;
+    height: 18rem;
+    width: 100%;
+}
+.card-img
+{
+    height: 100%;
+    object-fit: cover;
+}
+
+.towerevent-card-details
+{
+    background-color: rgba(204, 243, 253, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+a
+{
+    height: 100%;
+    width: 100%;
 }
 </style>
