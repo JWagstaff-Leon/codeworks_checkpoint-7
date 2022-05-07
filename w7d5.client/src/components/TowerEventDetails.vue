@@ -11,7 +11,7 @@
                         <span class="fs-4 fw-bold pe-0 pe-lg-2 pe-xl-0">{{towerEvent?.name}}</span>
                         <span class="fs-4 fw-bold ps-0 ps-lg-2 ps-xl-0">{{towerEvent?.startDate}}</span>
                     </div>
-                    <div class="d-flex flex-column flex-lg-row justify-content-between text-info">
+                    <div class="d-flex flex-column flex-lg-row justify-content-between text-primary">
                         <span class="fs-4 pe-0 pe-lg-2 pe-xl-0">@{{towerEvent?.location}}</span>
                         <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.startTime}}</span>
                     </div>
@@ -19,7 +19,7 @@
                         <span class="fs-6">{{towerEvent?.description}}</span>
                     </div>
                     <div class="d-flex justify-content-between mt-2">
-                        <span class="fs-4"><span class="fw-bold" :class="{'text-info': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spots left</span>
+                        <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spots left</span>
                         <button v-if="towerEvent?.capacity > 0" class="btn btn-warning px-4 py-2 no-select">Attend <i class="mdi mdi-human-handsup"></i></button>
                         <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>
                     </div>
