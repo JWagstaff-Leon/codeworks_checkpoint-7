@@ -67,7 +67,8 @@ export default
             account: computed(() => AppState.account),
             comments: computed(() =>
             {
-                return AppState.comments.forEach(comment => comment.attending = !!(attendees.value.find(attendee => attendee.id === comment.accountId)))
+                AppState.comments.forEach(comment => comment.attending = !!(attendees.value.find(attendee => attendee.id === comment.accountId)))
+                return AppState.comments;
             })
         }
     }

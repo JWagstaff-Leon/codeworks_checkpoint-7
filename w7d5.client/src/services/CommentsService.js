@@ -11,6 +11,12 @@ class CommentsService
         AppState.comments = res.data;
     }
 
+    async postComment(data)
+    {
+        const res = await api.post("api/comments", data);
+        AppState.comments.unshift(res.data);
+    }
+
     clearActive()
     {
         AppState.comments = [];

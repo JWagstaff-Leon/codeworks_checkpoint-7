@@ -7,11 +7,12 @@
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 main {
   flex-grow: 1;
+  max-height: 100vh;
 }
 
 a {

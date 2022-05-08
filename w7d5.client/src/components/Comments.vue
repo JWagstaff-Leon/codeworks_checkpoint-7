@@ -1,14 +1,16 @@
 <template>
     <div class="d-flex flex-column">
         <span class="text-dark lighten-40 mb-1 fs-5">What people are saying</span>
-        <div class="bg-dark lighten-20 p-4">
-            <CreateComment />
+        <div class="bg-dark lighten-20 py-3 px-5">
+            <CreateComment v-if="signedIn" />
             <Comment v-for="c in comments" :key="c.id" :comment="c" />
         </div>
     </div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState.js'
 export default
 {
     props:
@@ -23,7 +25,7 @@ export default
     setup()
     {
         return {
-            
+            signedIn: computed(() => AppState.user.isAuthenticated)
         }
     }
 }
