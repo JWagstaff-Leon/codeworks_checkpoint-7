@@ -48,7 +48,7 @@
         </template>
         
         <template #modal-body-slot>
-            <TowerEventForm :towerEvent="activeTowerEvent" />
+            <TowerEventForm />
         </template>
     </Modal>
 </template>
@@ -61,7 +61,6 @@ export default {
   setup() {
     return {
         signedIn: computed(() => AppState.account.id),
-        activeTowerEvent: computed(() => AppState.activeTowerEvent || {}),
         async logout()
         {
             AuthService.logout({ returnTo: window.location.origin });

@@ -33,8 +33,8 @@
                     <div v-if="towerEvent && towerEvent?.creatorId === account.id" class="towerevent-edit dropdown">
                         <button class="btn towerevent-edit-button text-light px-3 py-1 fs-1" title="Manage your event" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i><span class="visually-hidden" id="manage-event-button-label">Manage your event</span></button>
                         <ul class="dropdown-menu" aria-labelledby="manage-event-button-label">
-                            <li class="dropdown-item no-select">edit event</li>
-                            <li class="dropdown-item text-danger no-select">cancel event</li>
+                            <li class="dropdown-item no-select action" data-bs-toggle="modal" data-bs-target="#edit-event-modal">edit event</li>
+                            <li class="dropdown-item text-danger no-select action">cancel event</li>
                         </ul>
                     </div>
                 </div>
@@ -42,15 +42,15 @@
         </div>
     </div>
 
-    <!-- <Modal id="edit-event-modal">
+    <Modal id="edit-event-modal">
         <template #modal-title-slot>
-            <h4>Edit Tower Event</h4>
+            <h4>Edit Event</h4>
         </template>
         
         <template #modal-body-slot>
-
+            <TowerEventForm :towerEvent="towerEvent" />
         </template>
-    </Modal> -->
+    </Modal>
 </template>
 
 <script>
@@ -165,6 +165,11 @@ export default
 .dropdown-item
 {
     text-align: center;
+}
+
+#edit-event-modal
+{
+    animation-fill-mode: unset;
 }
 
 // REVIEW does this need to change on mobile

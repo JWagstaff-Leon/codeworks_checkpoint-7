@@ -89,12 +89,14 @@ export default
             editable.value = {...props.towerEvent, date: "" };
             if(props.towerEvent.startDate)
             {
-                editable.value.date = props.towerEvent.startDate.toLocaleDateString();
-                editable.value.day = editable.value.date.getDate();
-                editable.value.month = editable.value.date.getMonth() + 1;
-                editable.value.year = editable.value.date.getFullYear();
-                editable.value.hour = editable.value.date.getHours();
-                editable.value.minute = editable.value.date.getMinutes();
+                const oldDate = props.towerEvent.startDate
+                editable.value.date = oldDate.toLocaleDateString().split("/");
+                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-")
+                editable.value.day = oldDate.getDate();
+                editable.value.month = oldDate.getMonth() + 1;
+                editable.value.year = oldDate.getFullYear();
+                editable.value.hour = oldDate.getHours();
+                editable.value.minute = oldDate.getMinutes();
             }
         });
 
@@ -115,6 +117,7 @@ export default
                     if(editable.value.id)
                     {
                         await towerEventsService.edit(editable.value.id, editable.value);
+                        Modal.getOrCreateInstance(document.getElementById("edit-event-modal")).hide();
                         Pop.toast("Successfully edited event!", "success");
                     }
                     else
