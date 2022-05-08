@@ -161,6 +161,13 @@ class TowerEventsService
         AppState.activeTowerEvent = res.data;
     }
     
+    async cancelEvent(id)
+    {
+        const res = await api.delete("api/events/" + id);
+        logger.log("TowerEventsService > cancel response", res.data);
+        AppState.activeTowerEvent = res.data;
+    }
+    
     clearActive()
     {
         AppState.activeTowerEvent = null;

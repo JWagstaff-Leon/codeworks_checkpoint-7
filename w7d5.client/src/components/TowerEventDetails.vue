@@ -34,7 +34,7 @@
                         <button class="btn towerevent-edit-button text-light px-3 py-1 fs-1" title="Manage your event" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i><span class="visually-hidden" id="manage-event-button-label">Manage your event</span></button>
                         <ul class="dropdown-menu" aria-labelledby="manage-event-button-label">
                             <li class="dropdown-item no-select action" data-bs-toggle="modal" data-bs-target="#edit-event-modal">edit event</li>
-                            <li class="dropdown-item text-danger no-select action">cancel event</li>
+                            <li class="dropdown-item text-danger no-select action" @click="cancelEvent">cancel event</li>
                         </ul>
                     </div>
                 </div>
@@ -60,6 +60,7 @@ import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
 import { ticketsService } from '../services/TicketsService.js'
 import { useRoute } from 'vue-router'
+import { towerEventsService } from '../services/TowerEventsService.js'
 export default
 {
     props:
@@ -104,6 +105,22 @@ export default
                 catch(error)
                 {
                     logger.error("[TowerEventDetail.vue > unattend]", error.message);
+                    Pop.toast(error.message, "error");
+                }
+            },
+            async cancelEvent()
+            {
+                try
+                {
+                    if(await Pop.confirm())
+                    {
+                        await towerEventsService.cancelEvent(route.params.id);
+                        Pop.toast("Event cancelled successfully.", "success");
+                    }
+                }
+                catch(error)
+                {
+                    logger.error("[TowerEventDetails > cancelEvent]", error.message);
                     Pop.toast(error.message, "error");
                 }
             }
