@@ -74,14 +74,13 @@ export default
 
     watch:
     {
-        'props.towerEvent'(towerEvent)
+        'props.towerEvent.value'(towerEvent)
         {
-            editable.value = {...towerEvent, date: "" };
+            logger.log("towerEvent updated")
             if(towerEvent.startDate)
             {
-                const oldDate = towerEvent.startDate
-                editable.value.date = oldDate.toLocaleDateString().split("/");
-                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-");
+                const oldDate = towerEvent.startDate;
+                editable.value.date = towerEvent.startNums.year + "-" + towerEvent.startNums.month + "-" + towerEvent.startNums.day;
                 editable.value.day = oldDate.getDate();
                 editable.value.month = oldDate.getMonth() + 1;
                 editable.value.year = oldDate.getFullYear();
@@ -106,13 +105,21 @@ export default
 
         onMounted(() =>
         {
-            logger.log("props.towerEvent.startDate",props.towerEvent.startDate)
             editable.value = {...props.towerEvent };
-            if(props.towerEvent.startDate)
+            if(props.towerEvent.id)
             {
                 const oldDate = props.towerEvent.startDate
-                editable.value.date = oldDate.toLocaleDateString().split("/");
-                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-");
+                editable.value.date = props.towerEvent.startNums.year + "-";
+                if(+props.towerEvent.startNums.month < 10)
+                {
+                    editable.value.date += "0";
+                }
+                editable.value.date += props.towerEvent.startNums.month + "-";
+                if(+props.towerEvent.startNums.day < 10)
+                {
+                    editable.value.date += "0";
+                }
+                editable.value.date += props.towerEvent.startNums.day;
                 editable.value.day = oldDate.getDate();
                 editable.value.month = oldDate.getMonth() + 1;
                 editable.value.year = oldDate.getFullYear();

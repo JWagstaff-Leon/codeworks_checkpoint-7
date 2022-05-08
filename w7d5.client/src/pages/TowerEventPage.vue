@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row mt-4">
                 <div class="col-12">
-                    <TowerEventDetails :towerEvent="towerEvent"/>
+                    <TowerEventDetails v-if="towerEvent" :towerEvent="towerEvent"/>
                 </div>
             </div>
             <div v-if="!towerEvent.isCanceled" class="row mt-4">

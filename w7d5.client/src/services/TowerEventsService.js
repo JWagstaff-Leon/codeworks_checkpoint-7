@@ -108,6 +108,7 @@ function _parseDate(p_date)
     dateNums.year = p_date.getFullYear();
     dateNums.hour = p_date.getHours();
     dateNums.minute = p_date.getMinutes();
+    logger.log(p_date, "became", dateNums)
     return dateNums;
 }
 
