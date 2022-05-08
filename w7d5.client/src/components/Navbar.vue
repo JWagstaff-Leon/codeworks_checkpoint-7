@@ -48,7 +48,7 @@
         </template>
         
         <template #modal-body-slot>
-            <CreateTowerEventForm />
+            <TowerEventForm />
         </template>
     </Modal>
 </template>

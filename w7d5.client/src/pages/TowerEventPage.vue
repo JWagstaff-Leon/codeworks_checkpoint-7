@@ -7,7 +7,7 @@
                     <TowerEventDetails :towerEvent="towerEvent"/>
                 </div>
             </div>
-            <div class="row mt-4">
+            <div v-if="!towerEvent.isCanceled" class="row mt-4">
                 <div class="col-12">
                     <Attendees :attendees="attendees" />
                 </div>
@@ -67,7 +67,7 @@ export default
             account: computed(() => AppState.account),
             comments: computed(() =>
             {
-                AppState.comments.forEach(comment => comment.attending = !!(attendees.value.find(attendee => attendee.id === comment.accountId)))
+                AppState.comments.forEach(comment => comment.isAttending = !!(attendees.value.find(attendee => attendee.id === comment.creator.id)))
                 return AppState.comments;
             })
         }

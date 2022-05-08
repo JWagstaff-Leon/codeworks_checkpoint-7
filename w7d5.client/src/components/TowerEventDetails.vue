@@ -18,8 +18,11 @@
                     <div class="flex-grow-1 mt-3 description-clip">
                         <span class="fs-6">{{towerEvent?.description}}</span>
                     </div>
-                    <div class="d-flex justify-content-between mt-2">
-                        <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spot<span v-if="towerEvent.capacity != 1">s</span> left</span>
+                    <div v-if="towerEvent?.isCanceled" class="rounded bg-danger text-dark w-100 text-center fw-bolder pb-1 mt-1 fs-4 not-allowed">Event is cancelled <i class="mdi mdi-human-handsdown"></i></div>
+                    <div v-else class="d-flex justify-content-between mt-2">
+                        <div>
+                            <span class="fs-4"><span class="fw-bold" :class="{'text-primary': towerEvent?.capacity > 0, 'text-danger': towerEvent?.capacity <= 0}">{{towerEvent?.capacity}}</span> spot<span v-if="towerEvent.capacity != 1">s</span> left</span>
+                        </div>
                         <div v-if="account.id" class="d-flex align-items-center justify-content-center">
                             <div v-if="!userTicketsLoaded" class="spinner-border text-primary"></div>
                             <button v-else-if="userRegistered" class="btn btn-warning px-4 py-2 no-select" @click="unattend">Cancel Ticket <i class="mdi mdi-human-handsdown"></i></button>
