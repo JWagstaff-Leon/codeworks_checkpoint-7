@@ -47,7 +47,8 @@
         </div>
         <div class="d-flex justify-content-end">
             <button class="btn btn-outline-danger" type="button" data-bs-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary ms-3" type="submit">Create Event</button>
+            <button v-if="towerEvent.id" class="btn btn-primary ms-3" type="submit">Edit Event</button>
+            <button v-else class="btn btn-primary ms-3" type="submit">Create Event</button>
         </div>
     </form>
 </template>
@@ -67,7 +68,26 @@ export default
         towerEvent:
         {
             type: Object,
-            default: {}
+            default: {date: "", startDate: new Date()}
+        }
+    },
+
+    watch:
+    {
+        'props.towerEvent'(towerEvent)
+        {
+            editable.value = {...towerEvent, date: "" };
+            if(towerEvent.startDate)
+            {
+                const oldDate = towerEvent.startDate
+                editable.value.date = oldDate.toLocaleDateString().split("/");
+                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-");
+                editable.value.day = oldDate.getDate();
+                editable.value.month = oldDate.getMonth() + 1;
+                editable.value.year = oldDate.getFullYear();
+                editable.value.hour = oldDate.getHours();
+                editable.value.minute = oldDate.getMinutes();
+            }
         }
     },
 
@@ -86,12 +106,13 @@ export default
 
         onMounted(() =>
         {
-            editable.value = {...props.towerEvent, date: "" };
+            logger.log("props.towerEvent.startDate",props.towerEvent.startDate)
+            editable.value = {...props.towerEvent };
             if(props.towerEvent.startDate)
             {
                 const oldDate = props.towerEvent.startDate
                 editable.value.date = oldDate.toLocaleDateString().split("/");
-                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-")
+                editable.value.date = [editable.value.date[2], editable.value.date[0], editable.value.date[1]].join("-");
                 editable.value.day = oldDate.getDate();
                 editable.value.month = oldDate.getMonth() + 1;
                 editable.value.year = oldDate.getFullYear();

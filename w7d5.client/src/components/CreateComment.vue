@@ -46,7 +46,6 @@ export default
             posting,
             submitForm()
             {
-                logger.log("sus")
                 if(newComment.value.length > 0 && !posting.value)
                 {
                     postComment();

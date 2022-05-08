@@ -167,11 +167,6 @@ export default
     text-align: center;
 }
 
-#edit-event-modal
-{
-    animation-fill-mode: unset;
-}
-
 // REVIEW does this need to change on mobile
 @media only screen and (max-width: 1200px)
 {

@@ -1,6 +1,6 @@
 <template>
     <LoadingSpinner v-if="loading" />
-    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark fade-in">
+    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark" :class="{ 'fade-in': hasFadein }">
         <div class="container">
             <div class="row mt-4">
                 <div class="col-12">
@@ -38,8 +38,10 @@ export default
         const loading = ref(true);
         const route = useRoute();
         const attendees = computed(() => AppState.attendees);
+        const hasFadein = ref(true);
         onMounted(async () =>
         {
+            //Modals broke with an animation fill mode parent, so this is to fix that
             try
             {
                 towerEventsService.clearActive();
@@ -52,6 +54,7 @@ export default
                 loader.step(commentsService.getByEvent, [route.params.id]);
                 await loader.load();
                 loading.value = false;
+                setTimeout((() => hasFadein.value = false), 150)
             }
             catch(error)
             {
@@ -62,6 +65,7 @@ export default
 
         return {
             loading,
+            hasFadein,
             towerEvent: computed(() => AppState.activeTowerEvent),
             attendees,
             account: computed(() => AppState.account),
