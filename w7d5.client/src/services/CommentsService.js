@@ -8,7 +8,7 @@ class CommentsService
     {
         const res = await api.get("api/events/" + eventId + "/comments");
         logger.log("CommentsService.vue > getByEvent response", res.data);
-        AppState.comments = res.data;
+        AppState.comments = res.data.reverse();
     }
 
     async postComment(data)

@@ -37,5 +37,6 @@ export default {
 .main-view
 {
     overflow-y: scroll;
+    scrollbar-width: thin;
 }
 </style>
