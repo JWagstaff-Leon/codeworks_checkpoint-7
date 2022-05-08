@@ -55,7 +55,7 @@ class TicketsService
 
     clearUserActive()
     {
-        AppState.userTickets = [];
+        AppState.userTickets = null;
     }
 }
 

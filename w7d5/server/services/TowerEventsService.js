@@ -55,7 +55,7 @@ class TowerEventsService
         const removed = await this.findById(id);
         if (removed.creatorId.toString() !== userId)
         {
-            throw new Forbidden("You do not have permission to delete this event.");
+            throw new Forbidden("You do not have permission to cancel this event.");
         }
         removed.isCanceled = true;
         removed.save();

@@ -37,6 +37,7 @@ export default
     {
         const loading = ref(true);
         const route = useRoute();
+        const attendees = computed(() => AppState.attendees);
         onMounted(async () =>
         {
             try
@@ -62,9 +63,12 @@ export default
         return {
             loading,
             towerEvent: computed(() => AppState.activeTowerEvent),
-            attendees: computed(() => AppState.attendees),
+            attendees,
             account: computed(() => AppState.account),
-            comments: computed(() => AppState.comments)
+            comments: computed(() =>
+            {
+                return AppState.comments.forEach(comment => comment.attending = !!(attendees.value.find(attendee => attendee.id === comment.accountId)))
+            })
         }
     }
 }

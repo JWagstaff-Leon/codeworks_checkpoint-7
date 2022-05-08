@@ -1,8 +1,10 @@
 <template>
     <div class="d-flex flex-column">
         <span class="text-dark lighten-40 mb-1 fs-5">What people are saying</span>
-        <CreateComment />
-        <Comment v-for="c in comments" :key="c.id" :comment="c" />
+        <div class="bg-dark lighten-20 p-4">
+            <CreateComment />
+            <Comment v-for="c in comments" :key="c.id" :comment="c" />
+        </div>
     </div>
 </template>
 
