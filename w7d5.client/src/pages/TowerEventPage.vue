@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-10 offset-1">
+                <div class="col-12 col-xl-10 offset-xl-1">
                     <Comments :comments="comments" />
                 </div>
             </div>

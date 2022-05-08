@@ -30,8 +30,15 @@
       <!-- LOGIN COMPONENT HERE -->
       <Login />
       <router-link :to="{ name: 'Home' }">
-        <button class="btn text-info">home</button>
+        <button class="btn text-info py-2">home</button>
       </router-link>
+
+      <router-link :to="{ name: 'Account' }">
+        <button class="btn text-info py-2">Account</button>
+      </router-link>
+
+      <button class="btn btn-success mt-4">new event</button>
+      <button class="btn btn-dark mt-3 w-100">logout</button>
     </div>
   </nav>
 </template>

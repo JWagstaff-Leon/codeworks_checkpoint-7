@@ -31,13 +31,23 @@
                         <button class="btn towerevent-edit-button text-light px-3 py-1 fs-1" title="Manage your event" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i><span class="visually-hidden" id="manage-event-button-label">Manage your event</span></button>
                         <ul class="dropdown-menu" aria-labelledby="manage-event-button-label">
                             <li class="dropdown-item no-select">edit event</li>
-                            <li class="dropdown-item text-danger no-select">delete event</li>
+                            <li class="dropdown-item text-danger no-select">cancel event</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- <Modal id="edit-event-modal">
+        <template #modal-title-slot>
+            <h4>Edit Tower Event</h4>
+        </template>
+        
+        <template #modal-body-slot>
+
+        </template>
+    </Modal> -->
 </template>
 
 <script>

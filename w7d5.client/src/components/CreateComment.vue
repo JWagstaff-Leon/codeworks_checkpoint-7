@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="postComment">
-        <div class="d-flex flex-column align-items-end">
+        <div class="d-flex flex-column align-items-end my-4">
             <span class="text-success mb-2">Join the conversation</span>
                 <label class="visually-hidden">New comment</label>
                 <textarea class="w-100 form-control" placeholder="Tell the people" @keypress.enter="submitForm" v-model.trim="newComment" required></textarea>
@@ -16,7 +16,6 @@ import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
 import { commentsService } from '../services/CommentsService.js';
 import { useRoute } from 'vue-router';
-import { watchEffect } from '@vue/runtime-core';
 export default
 {
     setup()

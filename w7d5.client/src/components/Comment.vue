@@ -1,14 +1,22 @@
 <template>
     <div class="d-flex py-3">
         <img :src="comment.creator.picture" :alt="'profile picture of ' + comment.creator.name" class="rounded-circle me-2 shadow" />
-        <div class="d-flex flex-column bg-dark lighten-50 p-2 rounded-2 shadow">
+        <div class="d-flex flex-column bg-dark lighten-50 p-2 rounded-2 shadow flex-grow-1 position-relative">
             <span class="text-black">{{comment.creator.name}}</span>
-            <p>{{comment.body}}</p>
+            <div class="flex-grow-1">
+                <p>{{comment.body}}</p>
+            </div>
+            <i v-if="comment.creator.id === accountId" class="text-danger mdi mdi-delete selectable" title="delete your comment" @click="deleteComment"></i>
         </div>
     </div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState.js'
+import Pop from '../utils/Pop.js'
+import { logger } from '../utils/Logger.js'
+import { commentsService } from '../services/CommentsService.js'
 export default
 {
     props:
@@ -20,10 +28,26 @@ export default
         }
     },
 
-    setup()
+    setup(props)
     {
         return {
-            
+            accountId: computed(() => AppState.account.id),
+            async deleteComment()
+            {
+                try
+                {
+                    if(await Pop.confirm())
+                    {
+                        await commentsService.remove(props.comment.id);
+                        Pop.toast("Comment deleted", "success");
+                    }
+                }
+                catch(error)
+                {
+                    logger.error("[Comment.vue > deleteComment]", error.message);
+                    Pop.toast(error.message, "error");
+                }
+            }
         }
     }
 }
@@ -34,5 +58,13 @@ img
 {
     height: 5rem;
     width: 5rem;
+}
+
+i
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 1.25rem;
 }
 </style>
