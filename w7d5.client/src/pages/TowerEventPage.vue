@@ -12,6 +12,11 @@
                     <Attendees :attendees="attendees" />
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col-10 offset-1">
+                    <Comments :comments="comments" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -20,6 +25,7 @@
 import { computed, onMounted, ref } from '@vue/runtime-core'
 import { towerEventsService } from '../services/TowerEventsService.js';
 import { ticketsService } from '../services/TicketsService.js';
+import { commentsService } from '../services/CommentsService.js';
 import { useRoute } from 'vue-router';
 import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
@@ -37,10 +43,12 @@ export default
             {
                 towerEventsService.clearActive();
                 ticketsService.clearActive();
+                commentsService.clearActive();
                 loading.value = true;
                 const loader = new Loader();
                 loader.step(towerEventsService.getById, [route.params.id]);
                 loader.step(ticketsService.getByEvent, [route.params.id]);
+                loader.step(commentsService.getByEvent, [route.params.id]);
                 await loader.load();
                 loading.value = false;
             }
@@ -55,7 +63,8 @@ export default
             loading,
             towerEvent: computed(() => AppState.activeTowerEvent),
             attendees: computed(() => AppState.attendees),
-            account: computed(() => AppState.account)
+            account: computed(() => AppState.account),
+            comments: computed(() => AppState.comments)
         }
     }
 }
