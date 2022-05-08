@@ -43,7 +43,7 @@ class TowerEventsService
         edited.coverImg = data.coverImg || edited.coverImg;
         edited.location = data.location || edited.location;
         edited.maxCapacity = data.maxCapacity || edited.maxCapacity;
-        edited.capacity = typeof data.capacity === "number" ? data.capacity : edited.capacity;
+        edited.capacity = data.capacity || edited.capacity;
         edited.startDate = data.startDate || edited.startDate;
         edited.type = data.type || edited.type;
         

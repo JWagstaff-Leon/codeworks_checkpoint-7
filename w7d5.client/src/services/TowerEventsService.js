@@ -4,10 +4,9 @@ import { api } from "./AxiosService.js";
 
 function _formatDate(p_date)
 {
-    const oldDate = new Date(p_date);
     let newDate = "";
 
-    newDate += oldDate.getDate();
+    newDate += p_date.getDate();
     if(+newDate >= 4 && +newDate <= 20 )
     {
         newDate += "th";
@@ -39,7 +38,7 @@ function _formatDate(p_date)
 
     newDate += " of ";
 
-    switch(oldDate.getMonth())
+    switch(p_date.getMonth())
     {
         case 0:
             newDate += "January";
@@ -84,22 +83,32 @@ function _formatDate(p_date)
 
 function _formatTime(p_date)
 {
-    const oldTime = new Date(p_date);
     let newTime = "";
 
-    if(oldTime.getHours() < 10)
+    if(p_date.getHours() < 10)
     {
         newTime += "0";
     }
-    newTime += oldTime.getHours();
+    newTime += p_date.getHours();
     newTime += ":";
-    if(oldTime.getMinutes() < 10)
+    if(p_date.getMinutes() < 10)
     {
         newTime += "0";
     }
-    newTime += oldTime.getMinutes();
+    newTime += p_date.getMinutes();
     
     return newTime;
+}
+
+function _parseDate(p_date)
+{
+    const dateNums = {};
+    dateNums.day = p_date.getDate();
+    dateNums.month = p_date.getMonth() + 1;
+    dateNums.year = p_date.getFullYear();
+    dateNums.hour = p_date.getHours();
+    dateNums.minute = p_date.getMinutes();
+    return dateNums;
 }
 
 class TowerEventsService
@@ -108,8 +117,10 @@ class TowerEventsService
     {
         // this.clearAll();
         const res = await api.get("api/events");
-        res.data.forEach(v => v.startTime = _formatTime(v.startDate));
-        res.data.forEach(v => v.startDate = _formatDate(v.startDate));
+        res.data.forEach(v => v.startDate = new Date(v.startDate));
+        res.data.forEach(v => v.startNums = _parseDate(v.startDate));
+        res.data.forEach(v => v.dateString = _formatDate(v.startDate));
+        res.data.forEach(v => v.timeString = _formatTime(v.startDate));
         logger.log("TowerEventsService > getAll response", res.data);
         AppState.towerEvents = res.data;
     }
@@ -117,11 +128,12 @@ class TowerEventsService
     
     async getById(id)
     {
-        // debugger;
         // this.clearActive();
         const res = await api.get("api/events/" + id);
-        res.data.startTime = _formatTime(res.data.startDate);
-        res.data.startDate = _formatDate(res.data.startDate);
+        res.data.startDate = new Date(res.data.startDate);
+        res.data.startNums = _parseDate(res.data.startDate);
+        res.data.dateString = _formatDate(res.data.startDate);
+        res.data.timeString = _formatTime(res.data.startDate);
         logger.log("TowerEventsService > getById response", res.data);
         AppState.activeTowerEvent = res.data;
     }

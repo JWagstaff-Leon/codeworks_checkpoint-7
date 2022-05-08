@@ -9,11 +9,11 @@
                 <div class="d-flex flex-column pt-2 pt-xl-5 pb-4 px-3 px-lg-4 flex-grow-1">
                     <div class="d-flex flex-column flex-lg-row justify-content-between">
                         <span class="fs-4 fw-bold pe-0 pe-lg-2 pe-xl-0">{{towerEvent?.name}}</span>
-                        <span class="fs-4 fw-bold ps-0 ps-lg-2 ps-xl-0">{{towerEvent?.startDate}}</span>
+                        <span class="fs-4 fw-bold ps-0 ps-lg-2 ps-xl-0">{{towerEvent?.dateString}}</span>
                     </div>
                     <div class="d-flex flex-column flex-lg-row justify-content-between text-primary">
                         <span class="fs-4 pe-0 pe-lg-2 pe-xl-0">@{{towerEvent?.location}}</span>
-                        <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.startTime}}</span>
+                        <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.timeString}}</span>
                     </div>
                     <div class="flex-grow-1 mt-3 description-clip">
                         <span class="fs-6">{{towerEvent?.description}}</span>
