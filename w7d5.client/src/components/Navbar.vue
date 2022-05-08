@@ -1,52 +1,71 @@
 <template>
-  <nav class="navbar navbar-expand-xl navbar-dark px-3 flex-xl-column">
-    <router-link class="navbar-brand d-flex d-xl-none" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <span class="fs-2">the t<img alt="logo" src="../assets/img/tower_logo.svg" height="30" />wer</span>
-      </div>
-    </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse flex-column" id="navbarText">
-      <!-- <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
-          >
-            About
-          </router-link>
-        </li>
-      </ul> -->
-      <!-- LOGIN COMPONENT HERE -->
-      <Login />
-      <router-link :to="{ name: 'Home' }">
-        <button class="btn text-info py-2">home</button>
-      </router-link>
+    <nav class="navbar navbar-expand-xl navbar-dark px-3 flex-xl-column">
+        <router-link class="navbar-brand d-flex d-xl-none" :to="{ name: 'Home' }">
+            <div class="d-flex flex-column align-items-center">
+                <span class="fs-2">the t<img alt="logo" src="../assets/img/tower_logo.svg" height="30" />wer</span>
+            </div>
+        </router-link>
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon" />
+        </button>
+        <div class="collapse navbar-collapse flex-column" id="navbarText">
+            <!-- <ul class="navbar-nav me-auto">
+                <li>
+                <router-link
+                    :to="{ name: 'About' }"
+                    class="btn text-success lighten-30 selectable text-uppercase"
+                >
+                    About
+                </router-link>
+                </li>
+            </ul> -->
+            <!-- LOGIN COMPONENT HERE -->
+            <Login />
+            <router-link :to="{ name: 'Home' }">
+                <button class="btn text-info py-2">home</button>
+            </router-link>
 
-      <router-link :to="{ name: 'Account' }">
-        <button class="btn text-info py-2">Account</button>
-      </router-link>
+            <router-link v-if="signedIn" :to="{ name: 'Account' }">
+                <button class="btn text-info py-2">Account</button>
+            </router-link>
 
-      <button class="btn btn-success mt-4">new event</button>
-      <button class="btn btn-dark mt-3 w-100">logout</button>
-    </div>
-  </nav>
+            <button v-if="signedIn" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#create-event-modal">new event</button>
+            <button v-if="signedIn" class="btn btn-dark mt-3 w-100" @click="logout">logout</button>
+        </div>
+    </nav>
+
+    <Modal id="create-event-modal">
+        <template #modal-title-slot>
+            <h4>Create New Event</h4>
+        </template>
+        
+        <template #modal-body-slot>
+            <CreateTowerEventForm />
+        </template>
+    </Modal>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
+import { AuthService } from "../services/AuthService";
+import { AppState } from '../AppState.js';
 export default {
   setup() {
-    return {};
+    return {
+        signedIn: computed(() => AppState.account.id),
+        async logout()
+        {
+            AuthService.logout({ returnTo: window.location.origin });
+        }
+    };
   },
 };
 </script>

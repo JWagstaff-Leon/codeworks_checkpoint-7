@@ -27,6 +27,9 @@
   .text-#{$color} {
     color: $value !important;
   }
+  .border-#{$color} {
+    border-color: $value !important;
+  }
   $num: 5;
   @while $num < 100 {
     $darker: darken($value, $num);
