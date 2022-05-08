@@ -57,6 +57,9 @@ import { ref } from '@vue/reactivity'
 import { onMounted, watchEffect } from '@vue/runtime-core';
 import Pop from '../utils/Pop.js';
 import { logger } from '../utils/Logger.js';
+import { towerEventsService } from '../services/TowerEventsService.js';
+import { useRouter } from 'vue-router';
+import { Modal } from 'bootstrap';
 export default
 {
     props:
@@ -70,19 +73,28 @@ export default
 
     setup(props)
     {
-        const editable = ref({});
+        const editable = ref({date: ""});
+        const router = useRouter();
+
+        watchEffect(() =>
+        {
+            const nums = editable.value.date.split("-");
+            editable.value.year = +nums[0]
+            editable.value.month = +nums[1]
+            editable.value.day = +nums[2]
+        });
 
         onMounted(() =>
         {
-            editable.value = { ...props.towerEvent };
+            editable.value = {...props.towerEvent, date: "" };
             if(props.towerEvent.startDate)
             {
                 editable.value.date = props.towerEvent.startDate.toLocaleDateString();
-                editable.value.day = p_date.getDate();
-                editable.value.month = p_date.getMonth() + 1;
-                editable.value.year = p_date.getFullYear();
-                editable.value.hour = p_date.getHours();
-                editable.value.minute = p_date.getMinutes();
+                editable.value.day = editable.value.date.getDate();
+                editable.value.month = editable.value.date.getMonth() + 1;
+                editable.value.year = editable.value.date.getFullYear();
+                editable.value.hour = editable.value.date.getHours();
+                editable.value.minute = editable.value.date.getMinutes();
             }
         });
 
@@ -92,7 +104,26 @@ export default
             {
                 try
                 {
-                    
+                    const newStartDate = new Date();
+                    newStartDate.setFullYear(editable.value.year);
+                    newStartDate.setMonth(editable.value.month - 1);
+                    newStartDate.setDate(editable.value.day);
+                    newStartDate.setHours(editable.value.hour);
+                    newStartDate.setMinutes(editable.value.minute);
+                    editable.value.startDate = newStartDate;
+
+                    if(editable.value.id)
+                    {
+                        await towerEventsService.edit(editable.value.id, editable.value);
+                        Pop.toast("Successfully edited event!", "success");
+                    }
+                    else
+                    {
+                        const newId = await towerEventsService.create(editable.value);
+                        Modal.getOrCreateInstance(document.getElementById("create-event-modal")).hide();
+                        Pop.toast("Successfully created event!", "success");
+                        router.push({name: "TowerEvent", params: { id: newId }});
+                    }
                 }
                 catch(error)
                 {

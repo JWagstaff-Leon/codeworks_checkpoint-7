@@ -137,6 +137,28 @@ class TowerEventsService
         logger.log("TowerEventsService > getById response", res.data);
         AppState.activeTowerEvent = res.data;
     }
+
+    async create(data)
+    {
+        const res = await api.post("api/events", data);
+        res.data.startDate = new Date(res.data.startDate);
+        res.data.startNums = _parseDate(res.data.startDate);
+        res.data.dateString = _formatDate(res.data.startDate);
+        res.data.timeString = _formatTime(res.data.startDate);
+        logger.log("TowerEventsService > create response", res.data);
+        return res.data.id;
+    }
+    
+    async edit(id, data)
+    {
+        const res = await api.put("api/events/" + id, data);
+        res.data.startDate = new Date(res.data.startDate);
+        res.data.startNums = _parseDate(res.data.startDate);
+        res.data.dateString = _formatDate(res.data.startDate);
+        res.data.timeString = _formatTime(res.data.startDate);
+        logger.log("TowerEventsService > edit response", res.data);
+        AppState.activeTowerEvent = res.data;
+    }
     
     clearActive()
     {
