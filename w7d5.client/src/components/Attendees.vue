@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column no-select">
         <span class="text-dark lighten-40 mb-1 fs-5">See who is attending</span>
         <div class="bg-dark lighten-20 p-2 rounded shadow">
             <span v-if="!(attendees.length > 0) && capacity > 0" class="text-center d-block text-success darken-20 fs-2 fw-light fst-italic py-3">Be the first to attend</span>

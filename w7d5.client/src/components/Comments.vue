@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex flex-column">
-        <span class="text-dark lighten-60 mb-1 fs-5">What people are saying</span>
+        <span class="text-dark lighten-60 mb-1 fs-5 no-select">What people are saying</span>
         <div class="bg-dark lighten-20 py-3 px-5">
             <CreateComment v-if="signedIn" />
             <Comment v-for="c in comments" :key="c.id" :comment="c" />
