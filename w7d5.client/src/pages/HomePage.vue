@@ -21,9 +21,9 @@
         </ul>
             <div class="container">
                 <div class="row">
-                    <div class="col-12"></div>
-                </div>
-                <div class="row">
+                    <div v-if="towerEvents.length <= 0" class="col-12">
+                        <span class="text-primary text-center fs-3">No Events Found</span>
+                    </div>
                     <TowerEventCard v-for="t in towerEvents" :key="t.id" :towerEvent="t" />
                 </div>
             </div>
@@ -34,10 +34,6 @@
 <script>
 import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
-import { onMounted } from '@vue/runtime-core'
-import Pop from '../utils/Pop.js'
-import { logger } from '../utils/Logger.js'
-import { towerEventsService } from "../services/TowerEventsService.js";
 export default {
   name: 'Home',
   setup()
