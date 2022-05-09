@@ -12,7 +12,7 @@
                         <span class="fs-4 fw-bold ps-0 ps-lg-2 ps-xl-0">{{towerEvent?.dateString}}</span>
                     </div>
                     <div class="d-flex flex-column flex-lg-row justify-content-between text-primary">
-                        <span class="fs-4 pe-0 pe-lg-2 pe-xl-0">@{{towerEvent?.location}}</span>
+                        <span class="fs-4 pe-0 pe-lg-2 pe-xl-0">@ {{towerEvent?.location}}</span>
                         <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.timeString}}</span>
                     </div>
                     <div class="flex-grow-1 mt-3 description-clip">
