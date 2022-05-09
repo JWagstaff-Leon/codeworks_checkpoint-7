@@ -30,7 +30,7 @@
                             <button v-else class="btn btn-danger px-4 py-2 no-select not-allowed text-dark lighten-5">No spots left <i class="mdi mdi-human-handsdown"></i></button>
                         </div>
                     </div>
-                    <div v-if="towerEvent && towerEvent?.creatorId === account.id" class="towerevent-edit dropdown">
+                    <div v-if="!towerEvent.isCanceled && towerEvent?.creatorId === account.id" class="towerevent-edit dropdown">
                         <button class="btn towerevent-edit-button text-light px-3 py-1 fs-1" title="Manage your event" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i><span class="visually-hidden" id="manage-event-button-label">Manage your event</span></button>
                         <ul class="dropdown-menu" aria-labelledby="manage-event-button-label">
                             <li class="dropdown-item no-select action" data-bs-toggle="modal" data-bs-target="#edit-event-modal">edit event</li>

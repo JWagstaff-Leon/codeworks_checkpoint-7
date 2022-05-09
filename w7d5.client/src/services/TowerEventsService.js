@@ -108,7 +108,6 @@ function _parseDate(p_date)
     dateNums.year = p_date.getFullYear();
     dateNums.hour = p_date.getHours();
     dateNums.minute = p_date.getMinutes();
-    logger.log(p_date, "became", dateNums)
     return dateNums;
 }
 
@@ -164,8 +163,12 @@ class TowerEventsService
     async cancelEvent(id)
     {
         const res = await api.delete("api/events/" + id);
-        logger.log("TowerEventsService > cancel response", res.data);
+        res.data.startDate = new Date(res.data.startDate);
+        res.data.startNums = _parseDate(res.data.startDate);
+        res.data.dateString = _formatDate(res.data.startDate);
+        res.data.timeString = _formatTime(res.data.startDate);
         AppState.activeTowerEvent = res.data;
+        logger.log("TowerEventsService > cancel response", res.data);
     }
     
     clearActive()

@@ -72,24 +72,6 @@ export default
         }
     },
 
-    watch:
-    {
-        'props.towerEvent.value'(towerEvent)
-        {
-            logger.log("towerEvent updated")
-            if(towerEvent.startDate)
-            {
-                const oldDate = towerEvent.startDate;
-                editable.value.date = towerEvent.startNums.year + "-" + towerEvent.startNums.month + "-" + towerEvent.startNums.day;
-                editable.value.day = oldDate.getDate();
-                editable.value.month = oldDate.getMonth() + 1;
-                editable.value.year = oldDate.getFullYear();
-                editable.value.hour = oldDate.getHours();
-                editable.value.minute = oldDate.getMinutes();
-            }
-        }
-    },
-
     setup(props)
     {
         const editable = ref({date: ""});
