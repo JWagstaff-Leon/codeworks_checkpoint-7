@@ -16,11 +16,17 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from './AppState'
+import { towerEventsService } from './services/TowerEventsService.js';
 export default {
   name: 'App',
   setup() {
+      onMounted(() =>
+      {
+          towerEventsService.getAll();
+      });
+
     return {
       appState: computed(() => AppState)
     }

@@ -146,6 +146,7 @@ class TowerEventsService
         res.data.dateString = _formatDate(res.data.startDate);
         res.data.timeString = _formatTime(res.data.startDate);
         logger.log("TowerEventsService > create response", res.data);
+        AppState.towerEvents.push(res.data);
         return res.data.id;
     }
     
