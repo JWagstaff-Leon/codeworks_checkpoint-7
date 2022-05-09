@@ -68,7 +68,7 @@ export default
         towerEvent:
         {
             type: Object,
-            default: {date: "", startDate: new Date()}
+            default: {}
         }
     },
 
@@ -136,6 +136,7 @@ export default
                         Modal.getOrCreateInstance(document.getElementById("create-event-modal")).hide();
                         Pop.toast("Successfully created event!", "success");
                         router.push({name: "TowerEvent", params: { id: newId }});
+                        editable.value = {date: ""};
                     }
                 }
                 catch(error)

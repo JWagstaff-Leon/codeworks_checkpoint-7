@@ -33,6 +33,27 @@ import Pop from '../utils/Pop.js';
 import Loader from "../utils/Loader.js";
 export default
 {
+    watch:
+    {
+        async 'route.params.id'(newRoute)
+        {
+            logger.log("Event route change detected")
+            this.hasFadein = true;
+            this.loading = true;
+            towerEventsService.clearActive();
+            ticketsService.clearActive();
+            commentsService.clearActive();
+            const loader = new Loader();
+            loader.step(towerEventsService.getById, [newRoute]);
+            loader.step(ticketsService.getByEvent, [newRoute]);
+            loader.step(commentsService.getByEvent, [newRoute]);
+            await loader.load();
+            this.loading = false;
+            //Modals broke with a parent that has animation fill mode, so this is to fix that
+            setTimeout((() => this.hasFadein = false), 150)
+        }
+    },
+
     setup()
     {
         const loading = ref(true);
@@ -41,7 +62,6 @@ export default
         const hasFadein = ref(true);
         onMounted(async () =>
         {
-            //Modals broke with an animation fill mode parent, so this is to fix that
             try
             {
                 towerEventsService.clearActive();
@@ -54,6 +74,7 @@ export default
                 loader.step(commentsService.getByEvent, [route.params.id]);
                 await loader.load();
                 loading.value = false;
+                //Modals broke with a parent that has animation fill mode, so this is to fix that
                 setTimeout((() => hasFadein.value = false), 150)
             }
             catch(error)
@@ -64,6 +85,7 @@ export default
         });
 
         return {
+            route,
             loading,
             hasFadein,
             towerEvent: computed(() => AppState.activeTowerEvent),
