@@ -37,20 +37,23 @@ export default
     {
         async 'route.params.id'(newRoute)
         {
-            logger.log("Event route change detected")
-            this.hasFadein = true;
-            this.loading = true;
-            towerEventsService.clearActive();
-            ticketsService.clearActive();
-            commentsService.clearActive();
-            const loader = new Loader();
-            loader.step(towerEventsService.getById, [newRoute]);
-            loader.step(ticketsService.getByEvent, [newRoute]);
-            loader.step(commentsService.getByEvent, [newRoute]);
-            await loader.load();
-            this.loading = false;
-            //Modals broke with a parent that has animation fill mode, so this is to fix that
-            setTimeout((() => this.hasFadein = false), 150)
+            if(newRoute)
+            {
+                logger.log("Event route change detected")
+                this.hasFadein = true;
+                this.loading = true;
+                towerEventsService.clearActive();
+                ticketsService.clearActive();
+                commentsService.clearActive();
+                const loader = new Loader();
+                loader.step(towerEventsService.getById, [newRoute]);
+                loader.step(ticketsService.getByEvent, [newRoute]);
+                loader.step(commentsService.getByEvent, [newRoute]);
+                await loader.load();
+                this.loading = false;
+                //Modals broke with a parent that has animation fill mode, so this is to fix that
+                setTimeout((() => this.hasFadein = false), 150)
+            }
         }
     },
 

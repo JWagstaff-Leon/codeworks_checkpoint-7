@@ -87,9 +87,9 @@ export default
 
         onMounted(() =>
         {
-            editable.value = {...props.towerEvent };
             if(props.towerEvent.id)
             {
+                editable.value = {...props.towerEvent };
                 const oldDate = props.towerEvent.startDate
                 editable.value.date = props.towerEvent.startNums.year + "-";
                 if(+props.towerEvent.startNums.month < 10)
