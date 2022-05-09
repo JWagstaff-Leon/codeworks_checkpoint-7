@@ -1,9 +1,17 @@
 <template>
-  <div class="about text-center">
-    <h1>Welcome {{ account.name }}</h1>
-    <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
-  </div>
+    <LoadingSpinner v-if="!loaded" />
+    <div v-else class="container-fluid my-5 px-3 fade-in">
+        <span class="text-success fs-3">Your Events</span>
+        <div class="row px-5">
+            <TowerEventCard v-for="u in userEvents" :key="u.id" :towerEvent="u" />
+        </div>
+            <span class="text-success fs-3 mt-5 pt-5">Upcoming Events</span>
+        <div class="row flex-column">
+            <div class="col-6 offset-3">
+                <UserTicket v-for="u in userTickets" :key="u.id" :ticket="u" />
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -13,14 +21,13 @@ export default {
   name: 'Account',
   setup() {
     return {
-      account: computed(() => AppState.account)
+        loaded: computed(() => AppState.towerEvents && AppState.userTickets),
+        userEvents: computed(() => AppState.towerEvents?.filter(event => event.creatorId === AppState.account.id)),
+        userTickets: computed(() => AppState.userTickets?.filter(ticket => ticket.event.isCanceled === false))
     }
   }
 }
 </script>
 
 <style scoped>
-img {
-  max-width: 100px;
-}
 </style>

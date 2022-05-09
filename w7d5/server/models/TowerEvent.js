@@ -6,7 +6,7 @@ export const TowerEventSchema = new Schema (
         creatorId: { type: Schema.Types.ObjectId, ref: "Account", required: true },
         name: { type: String, required: true },
         description: { type: String, required: true },
-        coverImg: { type: String },
+        coverImg: { type: String, required: true },
         location: { type: String, required: true },
         maxCapacity: { type: Number, required: true},
         startDate: { type: Date, required: true },
