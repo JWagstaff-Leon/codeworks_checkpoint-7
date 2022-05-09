@@ -97,10 +97,13 @@ class TicketsService
         const res = await api.post("api/tickets", { eventId });
         const res2 = await api.get("account/tickets");
 
+        
         logger.log("TicketsService > attendEvent > post 'api/tickets' response", res.data);
         logger.log("TicketsService > attendEvent > get 'account/tickets' response", res2.data);
-
-        AppState.userTickets.push(res2.data.find(ticket => ticket.eventId === res.data.eventId));
+        
+        const newTicket = res2.data.find(ticket => ticket.eventId === res.data.eventId);
+        newTicket.event.dateString = _formatDate(newTicket.event.startDate);
+        AppState.userTickets.push(newTicket);
         AppState.attendees.unshift(res.data.account);
 
         AppState.activeTowerEvent.capacity -= 1;
@@ -116,6 +119,9 @@ class TicketsService
 
         const userIndex = AppState.userTickets.findIndex(ticket => ticket.eventId === res.data.eventId);
         AppState.userTickets.splice(userIndex, 1);
+
+        const eventIndex = AppState.towerEvents.findIndex(event => event.id === res.data.eventId);
+        AppState.towerEvents.splice(eventIndex, 1);
         
         AppState.activeTowerEvent.capacity += 1;
     }

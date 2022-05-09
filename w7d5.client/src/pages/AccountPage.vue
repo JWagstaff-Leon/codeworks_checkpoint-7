@@ -1,14 +1,16 @@
 <template>
     <LoadingSpinner v-if="!loaded" />
-    <div v-else class="container-fluid my-5 px-3 fade-in">
-        <span class="text-success fs-3">Your Events</span>
-        <div class="row px-5">
-            <TowerEventCard v-for="u in userEvents" :key="u.id" :towerEvent="u" />
-        </div>
-            <span class="text-success fs-3 mt-5 pt-5">Upcoming Events</span>
-        <div class="row flex-column">
-            <div class="col-6 offset-3">
-                <UserTicket v-for="u in userTickets" :key="u.id" :ticket="u" />
+    <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark fade-in">
+        <div class="container my-5 px-3">
+            <span class="text-success fs-3">Your Events</span>
+            <div class="row px-xl-5">
+                <TowerEventCard v-for="u in userEvents" :key="u.id" :towerEvent="u" />
+            </div>
+                <span class="text-success fs-3 mt-5 pt-5">Upcoming Events</span>
+            <div class="row flex-column">
+                <div class="col-12 col-xl-8 offset-0 offset-xl-2">
+                    <UserTicket v-for="u in userTickets" :key="u.id" :ticket="u" />
+                </div>
             </div>
         </div>
     </div>

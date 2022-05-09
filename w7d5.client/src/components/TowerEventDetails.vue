@@ -98,7 +98,8 @@ export default
                 {
                     if(await Pop.confirm())
                     {
-                        await ticketsService.unattendEvent(route.params.id);
+                        const id = (AppState.userTickets.find(ticket => ticket.eventId === route.params.id)).id;
+                        await ticketsService.unattendEvent(id);
                         Pop.toast("You have unregistered from " + props.towerEvent.name + ".")
                     }
                 }
