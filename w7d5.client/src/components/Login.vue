@@ -7,7 +7,7 @@
     >
       Login
     </button>
-    <div class="dropdown my-2 my-lg-0" v-else>
+    <div v-else>
       
         <div v-if="account.picture">
           <img

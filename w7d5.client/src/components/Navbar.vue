@@ -28,6 +28,8 @@
                 </li>
             </ul> -->
             <!-- LOGIN COMPONENT HERE -->
+            <div class="dropdown my-2 my-lg-0">
+            <div class="d-flex flex-row flex-xl-column justify-content-around align-items-center">
             <Login />
             <router-link :to="{ name: 'Home' }">
                 <button class="btn text-info py-2">home</button>
@@ -36,9 +38,13 @@
             <router-link v-if="signedIn" :to="{ name: 'Account' }">
                 <button class="btn text-info py-2">Account</button>
             </router-link>
-
-            <button v-if="signedIn" class="btn btn-success mt-4" data-bs-toggle="modal" data-bs-target="#create-event-modal">new event</button>
-            <button v-if="signedIn" class="btn btn-dark mt-3 w-100" @click="logout">logout</button>
+            </div>
+            
+            <div class="d-flex flex-row flex-xl-column">
+                <button v-if="signedIn" class="btn btn-success mt-3 mt-xl-4 me-3 me-xl-0 flex-grow-1" data-bs-toggle="modal" data-bs-target="#create-event-modal">new event</button>
+                <button v-if="signedIn" class="btn btn-dark mt-3 w-xl-100  ms-3 ms-xl-0 flex-grow-1" @click="logout">logout</button>
+            </div>
+            </div>
         </div>
     </nav>
 
