@@ -1,13 +1,12 @@
 <template>
     <div class="position-relative d-inline-block">
-        <img :src="attendee.picture" @mouseenter="nameVisible = true; firstHovered = true" @mouseleave="nameVisible = false" />
+        <img :src="attendee.picture" @mouseenter="nameVisible = true; firstHovered = true" @mouseleave="nameVisible = false" :title="attendee.name" />
         <span :class="{'fade-in': nameVisible, 'fade-out': !nameVisible, 'visually-hidden': !firstHovered}" class="border-2 rounded-3 py-2 px-3 text-light bg-dark darken-10">{{attendee.name}}</span>
     </div>
 </template>
 
 <script>
 import { ref } from '@vue/reactivity';
-import { logger } from '../utils/Logger.js';
 export default
 {
     props:

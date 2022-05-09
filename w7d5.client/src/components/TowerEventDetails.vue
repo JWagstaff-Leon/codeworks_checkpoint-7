@@ -1,6 +1,6 @@
 <template>
     <div class="towerevent-header card border-0 no-select shadow">
-        <img :src="towerEvent?.coverImg" class="card-img" alt="" draggable="false">
+        <img :src="towerEvent?.coverImg" class="card-img" :alt="'Event image for ' + towerEvent?.name" draggable="false">
         <div class="card-img-overlay p-0 d-flex">
             <div class="towerevent-overview d-flex flex-column flex-xl-row flex-grow-1">
                 <div class="d-flex align-items-center justify-content-center">
@@ -197,12 +197,6 @@ export default
     .towerevent-header
     {
         min-height: 90vh;
-    }
-
-    .description-clip
-    {
-        // max-height: 55%;
-        max-height: calc(100% - 210px);
     }
 }
 </style>

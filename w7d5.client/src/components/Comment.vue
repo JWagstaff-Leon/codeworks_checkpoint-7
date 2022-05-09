@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex py-3">
         <img :src="comment.creator.picture" :alt="'profile picture of ' + comment.creator.name" class="rounded-circle me-2 shadow" />
-        <div class="d-flex flex-column bg-dark lighten-50 p-2 rounded-2 shadow flex-grow-1 position-relative">
+        <div class="d-flex flex-column bg-dark lighten-70 p-2 rounded-2 shadow flex-grow-1 position-relative">
             <span class="text-black">{{comment.creator.name}} <i v-if="comment.isAttending" class="text-warning mdi mdi-human-handsup fs-5" :title="comment.creator.name + ' is attending'"></i></span>
             <div class="flex-grow-1">
                 <p>{{comment.body}}</p>
