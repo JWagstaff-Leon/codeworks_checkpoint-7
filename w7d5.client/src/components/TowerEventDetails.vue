@@ -4,7 +4,7 @@
         <div class="card-img-overlay p-0 d-flex flex-grow-1">
             <div class="towerevent-overview d-flex flex-column flex-xl-row flex-grow-1 w-100 bg-dark lighten-20">
                 <div class="d-flex align-items-center justify-content-center">
-                    <img :src="towerEvent?.coverImg" class="towerevent-image p-3 mt-4 mt-xl-0" draggable="false"/>
+                    <img :src="towerEvent?.coverImg" class="towerevent-image p-3 mt-4 mt-xl-0" :alt="'Event image for ' + towerEvent?.name" draggable="false"/>
                 </div>
                 <div class="d-flex flex-column pt-2 pt-xl-5 pb-4 px-3 px-lg-4 flex-grow-1 details-side">
                     <div class="d-flex flex-column flex-lg-row justify-content-between">
