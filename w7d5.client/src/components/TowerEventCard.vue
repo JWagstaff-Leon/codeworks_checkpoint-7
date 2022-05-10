@@ -53,7 +53,7 @@ export default
 
 .towerevent-card-details
 {
-    background-color: hsla(192, 00%, 0%, 0.5);
+    background-color: hsla(192, 00%, 0%, 0.65);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 }
