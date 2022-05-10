@@ -1,12 +1,12 @@
 <template>
     <div class="towerevent-header card border-0 no-select shadow">
         <img :src="towerEvent?.coverImg" class="card-img" :alt="'Event image for ' + towerEvent?.name" draggable="false">
-        <div class="card-img-overlay p-0 d-flex">
-            <div class="towerevent-overview d-flex flex-column flex-xl-row flex-grow-1">
+        <div class="card-img-overlay p-0 d-flex flex-grow-1">
+            <div class="towerevent-overview d-flex flex-column flex-xl-row flex-grow-1 w-100 bg-dark lighten-20">
                 <div class="d-flex align-items-center justify-content-center">
-                    <img :src="towerEvent?.coverImg" class="towerevent-image p-3" draggable="false"/>
+                    <img :src="towerEvent?.coverImg" class="towerevent-image p-3 mt-4 mt-xl-0" draggable="false"/>
                 </div>
-                <div class="d-flex flex-column pt-2 pt-xl-5 pb-4 px-3 px-lg-4 flex-grow-1">
+                <div class="d-flex flex-column pt-2 pt-xl-5 pb-4 px-3 px-lg-4 flex-grow-1 details-side">
                     <div class="d-flex flex-column flex-lg-row justify-content-between">
                         <span class="fs-4 fw-bold pe-0 pe-lg-2 pe-xl-0">{{towerEvent?.name}}</span>
                         <span class="fs-4 fw-bold ps-0 ps-lg-2 ps-xl-0">{{towerEvent?.dateString}}</span>
@@ -15,8 +15,8 @@
                         <span class="fs-4 pe-0 pe-lg-2 pe-xl-0">@ {{towerEvent?.location}}</span>
                         <span class="fs-4 ps-0 ps-lg-2 ps-xl-0">starting {{towerEvent?.timeString}}</span>
                     </div>
-                    <div class="flex-grow-1 mt-3 description-clip">
-                        <span class="fs-6">{{towerEvent?.description}}</span>
+                    <div class="flex-grow-1 mt-3 mb-2">
+                        <span class="fs-6 fw-bold word-break">{{towerEvent?.description}}</span>
                     </div>
                     <div v-if="towerEvent?.isCanceled" class="rounded bg-danger text-dark w-100 text-center fw-bolder pb-1 mt-1 fs-4 not-allowed">Event is cancelled <i class="mdi mdi-human-handsdown"></i></div>
                     <div v-else class="d-flex justify-content-between mt-2">
@@ -144,7 +144,7 @@ export default
 
 .towerevent-overview
 {
-    background-color: hsla(192, 00%, 0%, 0.5);
+    background-color: hsla(192, 00%, 0%, 0.5) !important;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 }
@@ -161,10 +161,14 @@ export default
     cursor: not-allowed;
 }
 
-.description-clip
+.details-side
 {
-    text-overflow: ellipsis;
-    overflow-y: hidden;
+    max-width: calc(100% - 20rem);
+}
+
+.word-break
+{
+    word-wrap: break-word;
 }
 
 .towerevent-edit
@@ -185,9 +189,12 @@ export default
     text-align: center;
 }
 
-// REVIEW does this need to change on mobile
 @media only screen and (max-width: 1200px)
 {
+    .towerevent-overview
+    {
+        background-color: #555b75 !important;
+    }
     .towerevent-image
     {
         height: 10rem;
@@ -196,7 +203,23 @@ export default
 
     .towerevent-header
     {
-        min-height: 90vh;
+        min-height: unset;
+        height: unset;
+    }
+
+    .details-side
+    {
+        max-width: 100%;
+    }
+
+    .card-img
+    {
+        display: none
+    }
+
+    .card-img-overlay
+    {
+        position: unset;
     }
 }
 </style>

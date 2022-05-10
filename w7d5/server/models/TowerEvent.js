@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 export const TowerEventSchema = new Schema (
     {
         creatorId: { type: Schema.Types.ObjectId, ref: "Account", required: true },
-        name: { type: String, required: true },
+        name: { type: String, required: true, maxlength: 40 },
         description: { type: String, required: true },
         coverImg: { type: String, required: true },
-        location: { type: String, required: true },
+        location: { type: String, required: true, maxlength: 40 },
         maxCapacity: { type: Number, required: true},
         startDate: { type: Date, required: true },
         isCanceled: { type: Boolean, default: false },

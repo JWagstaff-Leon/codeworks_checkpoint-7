@@ -3,7 +3,7 @@
         <img :src="comment.creator.picture" :alt="'profile picture of ' + comment.creator.name" class="rounded-circle me-2 shadow" />
         <div class="d-flex flex-column bg-dark lighten-70 p-2 rounded-2 shadow flex-grow-1 position-relative">
             <span class="text-black">{{comment.creator.name}} <i v-if="comment.isAttending" class="text-warning mdi mdi-human-handsup fs-5" :title="comment.creator.name + ' is attending'"></i></span>
-            <div class="flex-grow-1">
+            <div class="flex-grow-1 comment-body">
                 <p>{{comment.body}}</p>
             </div>
             <i v-if="comment.creator.id === accountId" class="text-danger mdi mdi-delete selectable delete-button" title="delete your comment" @click="deleteComment" role="button"></i>
@@ -66,5 +66,15 @@ img
     top: 0px;
     right: 0px;
     font-size: 1.25rem;
+}
+
+.comment-body
+{
+    max-width: calc(100% - 5.5rem);
+}
+
+p
+{
+    word-wrap: break-word;
 }
 </style>
