@@ -42,7 +42,7 @@ export default {
     
         return {
             tab,
-            towerEvents: computed(() => AppState.towerEvents.filter(towerEvent => towerEvent.type.includes(tab.value)))
+            towerEvents: computed(() => AppState.towerEvents?.filter(towerEvent => towerEvent.type.includes(tab.value)))
         }
     }
 }

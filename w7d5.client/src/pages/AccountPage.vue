@@ -1,6 +1,7 @@
 <template>
     <LoadingSpinner v-if="!loaded" />
     <div v-else class="flex-grow-1 d-flex flex-column align-items-center bg-dark fade-in">
+        <span class="text-primary fs-1 mt-3 border-bottom border-primary pb-1 no-select">Your Account Page</span>
         <div class="container my-5 px-3">
             <div class="d-flex flex-column">
                 <span class="text-success fs-3 no-select">Your Events</span>

@@ -21,7 +21,7 @@
                 <div class="d-flex flex-row flex-xl-column justify-content-around align-items-center">
                 <Login />
                 <router-link :to="{ name: 'Home' }" title="Go to home page">
-                    <button class="btn text-info py-2">home</button>
+                    <button class="btn text-info py-2">Home</button>
                 </router-link>
 
                 <router-link v-if="signedIn" :to="{ name: 'Account' }" title="Go to your account page">

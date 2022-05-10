@@ -106,6 +106,9 @@ class TicketsService
         AppState.userTickets.push(newTicket);
         AppState.attendees.unshift(res.data.account);
 
+        const eventIndex = AppState.towerEvents.findIndex(event => event.id === res.data.eventId);
+        AppState.towerEvents[eventIndex].capacity -= 1;
+
         AppState.activeTowerEvent.capacity -= 1;
     }
     
@@ -121,7 +124,7 @@ class TicketsService
         AppState.userTickets.splice(userIndex, 1);
 
         const eventIndex = AppState.towerEvents.findIndex(event => event.id === res.data.eventId);
-        AppState.towerEvents.splice(eventIndex, 1);
+        AppState.towerEvents[eventIndex].capacity += 1;
         
         AppState.activeTowerEvent.capacity += 1;
     }
