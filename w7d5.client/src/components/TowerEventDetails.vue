@@ -144,7 +144,7 @@ export default
 
 .towerevent-overview
 {
-    background-color: hsla(192, 00%, 0%, 0.5) !important;
+    background-color: hsla(192, 00%, 0%, 0.65) !important;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
 }

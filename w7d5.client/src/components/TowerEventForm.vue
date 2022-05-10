@@ -3,7 +3,7 @@
         <div class="d-flex mb-3">
             <div class="me-1 flex-grow-1">
                 <label>Event Name</label>
-                <input type="text" class="form-control" placeholder="Tower Event Name" v-model="editable.name" maxlength="40" required />
+                <input type="text" class="form-control" placeholder="Tower Event Name" v-model="editable.name" maxlength="30" required />
             </div>
             <div class="ms-1">
                 <label>Event Type</label>
@@ -22,7 +22,7 @@
         <div class="d-flex mb-2">
             <div class="me-1">
                 <label>Event Location</label>
-                <input type="text" class="form-control mb-3" placeholder="Location" v-model="editable.location" maxlength="40" required />
+                <input type="text" class="form-control mb-3" placeholder="Location" v-model="editable.location" maxlength="30" required />
             </div>
             <div class="ms-1">
                 <label>Capacity</label>

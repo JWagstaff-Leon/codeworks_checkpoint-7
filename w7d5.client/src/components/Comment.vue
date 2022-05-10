@@ -1,9 +1,9 @@
 <template>
     <div class="d-flex py-3">
         <img :src="comment.creator.picture" :alt="'profile picture of ' + comment.creator.name" class="rounded-circle me-2 shadow" />
-        <div class="d-flex flex-column bg-dark lighten-70 p-2 rounded-2 shadow flex-grow-1 position-relative">
+        <div class="d-flex flex-column bg-dark lighten-70 p-2 rounded-2 shadow flex-grow-1 position-relative comment-body">
             <span class="text-black">{{comment.creator.name}} <i v-if="comment.isAttending" class="text-warning mdi mdi-human-handsup fs-5" :title="comment.creator.name + ' is attending'"></i></span>
-            <div class="flex-grow-1 comment-body">
+            <div class="flex-grow-1">
                 <p>{{comment.body}}</p>
             </div>
             <i v-if="comment.creator.id === accountId" class="text-danger mdi mdi-delete selectable delete-button" title="delete your comment" @click="deleteComment" role="button"></i>
